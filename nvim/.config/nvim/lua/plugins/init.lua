@@ -14,13 +14,19 @@ return {
       require("nvchad.configs.lspconfig").defaults()
       require "configs.lspconfig"
     end,
+    opts = {
+      servers = {
+        tailwindcss = {},
+      }
+    }
   },
   {
     "williamboman/mason.nvim",
     oopts = {
       ensure_installed = {
         "lua-language-server", "stylua",
-        "html-lsp", "css-lsp", "prettier"
+        "html-lsp", "css-lsp", "prettier",
+        "tailwindcss-language-server"
       },
     },
   },
@@ -44,8 +50,8 @@ return {
       require("nvim-tree").setup {}
     end,
   },
-  { "startup-nvim/startup.nvim" }, 
-{
+  { "startup-nvim/startup.nvim" },
+  {
     "github/copilot.vim",
     lazy = false,
     config = function()
@@ -55,14 +61,7 @@ return {
     end,
   },
   {
-  "jose-elias-alvarez/null-ls.nvim",
-  config = function()
-    require("null-ls").setup({
-      sources = {
-        require("null-ls").builtins.formatting.prettier,
-        require("null-ls").builtins.formatting.black,
-        -- add other formatters here
-      },
-    })
-  end,
-}, }
+    "sindrets/diffview.nvim",
+  },
+}
+

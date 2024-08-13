@@ -13,5 +13,33 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+lspconfig.tsserver.setup {
+  on_attach = function(client, bufnr)
+    client.resolved_capabilities.document_formatting = false
+    on_attach(client, bufnr)
+  end,
+  capabilities = capabilities,
+}
+
+lspconfig.html.setup {
+  on_attach = function(client, bufnr)
+    client.resolved_capabilities.document_formatting = false
+    on_attach(client, bufnr)
+  end,
+  capabilities = capabilities,
+}
+
+lspconfig.cssls.setup {
+  on_attach = function(client, bufnr)
+    client.resolved_capabilities.document_formatting = false
+    on_attach(client, bufnr)
+  end,
+  capabilities = capabilities,
+}
+
+lspconfig.tailwindcss.setup ({
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
 -- 
 -- lspconfig.pyright.setup { blabla}
