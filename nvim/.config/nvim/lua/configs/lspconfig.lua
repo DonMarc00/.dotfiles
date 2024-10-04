@@ -6,7 +6,7 @@ local pid = vim.fn.getpid()
 local omnisharp_bin = "/usr/local/bin/omnisharp-roslyn/"
 
 local lspconfig = require "lspconfig"
-local servers = { "html", "cssls", "tsserver", "clangd", "pyright", "rust_analyzer", "tailwindcss", "jsonls", "yamlls", "dockerls", "csharp_ls"}
+local servers = { "html", "cssls", "ts_ls", "clangd", "pyright", "rust_analyzer", "tailwindcss", "jsonls", "yamlls", "dockerls", "csharp_ls"}
 
 -- lsps with default config
 for _, lsp in ipairs(servers) do
@@ -18,7 +18,7 @@ for _, lsp in ipairs(servers) do
 end
 
 -- typescript
-lspconfig.tsserver.setup {
+lspconfig.ts_ls.setup {
   on_attach = on_attach,
   on_init = on_init,
   capabilities = capabilities,
@@ -28,5 +28,3 @@ lspconfig.omnisharp.setup{
     cmd = { omnisharp_bin, "--languageserver" , "--hostPID", tostring(pid) }
     -- Additional configuration can be added here
 }
-
-
