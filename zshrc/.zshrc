@@ -104,7 +104,13 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias ls="eza --icons=always"
 
+# ---- Zoxide (better cd) ----
+eval "$(zoxide init zsh)"
+alias cd="z"
+
+export PATH="/usr/local/bin:$PATH"
 export PATH="$PATH:/home/DonMarc0/snap/flutter/common/flutter/bin"
 export PATH="$PATH:/home/DonMarc0/Android/Sdk/cmdline-tools/bin"
 export JAVA_HOME=/usr/lib/jvm/java-21-openjdk

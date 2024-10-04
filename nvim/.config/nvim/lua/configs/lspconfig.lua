@@ -2,6 +2,8 @@
 local on_attach = require("nvchad.configs.lspconfig").on_attach
 local on_init = require("nvchad.configs.lspconfig").on_init
 local capabilities = require("nvchad.configs.lspconfig").capabilities
+local pid = vim.fn.getpid()
+local omnisharp_bin = "/usr/local/bin/omnisharp-roslyn/"
 
 local lspconfig = require "lspconfig"
 local servers = { "html", "cssls", "tsserver", "clangd", "pyright", "rust_analyzer", "tailwindcss", "jsonls", "yamlls", "dockerls", "csharp_ls"}
@@ -20,6 +22,11 @@ lspconfig.tsserver.setup {
   on_attach = on_attach,
   on_init = on_init,
   capabilities = capabilities,
+}
+
+lspconfig.omnisharp.setup{
+    cmd = { omnisharp_bin, "--languageserver" , "--hostPID", tostring(pid) }
+    -- Additional configuration can be added here
 }
 
 
