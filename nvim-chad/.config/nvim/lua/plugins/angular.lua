@@ -1,0 +1,5 @@
+return {
+  {
+     'joeveiga/ng.nvim'
+  },
+}
