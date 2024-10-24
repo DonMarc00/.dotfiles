@@ -20,13 +20,16 @@ source "${ZINIT_HOME}/zinit.zsh"
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
-zinit light Aloxaf/fzf-tab
+# zinit light Aloxaf/fzf-tab
 
 export WINHOME="/mnt/c/Users/NovakM/"
 export OBSIDIAN="/mnt/c/Users/NovakM/ObsidianVaults/KnowledgeDB/"
 export ASA_PW="2Kzt3\`rrrKMYe\$WX\`aAF"
 export FSD_PW="atnluNZFc8cN95GJiRocF8kuxrmAu8"
 export PATH="$PATH:/home/novak/.dotnet/tools"
+export PATH="$PATH/usr/local/bin/netcoredbg/netcoredbg"
+export DOTNET_ENVIRONMENT='local'
+export ASPNETCORE_ENVIRONMENT='local'
 
 alias nuget="mono /usr/local/bin/nuget.exe"
 alias dev-tmux="~/.config/tmux/dev-tmux.sh"
@@ -56,8 +59,8 @@ setopt hist_find_no_dups
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+# zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 
 plugins=(git sudo zsh-256color zsh-autosuggestions zsh-syntax-highlighting tmux)
@@ -65,7 +68,6 @@ ZSH_TMUX_AUTOSTART=true
 
 # Load Angular CLI autocompletion.
 source <(ng completion script)
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
