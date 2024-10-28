@@ -20,7 +20,11 @@ source "${ZINIT_HOME}/zinit.zsh"
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
-# zinit light Aloxaf/fzf-tab
+zinit light Aloxaf/fzf-tab
+
+autoload -Uz compinit && compinit
+
+zinit cdreplay -q
 
 export WINHOME="/mnt/c/Users/NovakM/"
 export OBSIDIAN="/mnt/c/Users/NovakM/ObsidianVaults/KnowledgeDB/"
@@ -59,11 +63,11 @@ setopt hist_find_no_dups
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
-# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-# zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 
-plugins=(git sudo zsh-256color zsh-autosuggestions zsh-syntax-highlighting tmux)
+# plugins=(git sudo zsh-256color zsh-autosuggestions zsh-syntax-highlighting tmux)
 ZSH_TMUX_AUTOSTART=true
 
 # Load Angular CLI autocompletion.

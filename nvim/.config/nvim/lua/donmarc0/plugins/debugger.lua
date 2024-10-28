@@ -7,6 +7,24 @@ return {
 			dapui.setup()
 			local keymap = vim.keymap
 
+			vim.fn.sign_define(
+				"DapBreakpoint",
+				{ text = "", texthl = "DiagnosticSignError", linehl = "", numhl = "" }
+			)
+			vim.fn.sign_define(
+				"DapBreakpointCondition",
+				{ text = "", texthl = "DiagnosticSignWarn", linehl = "", numhl = "" }
+			)
+			vim.fn.sign_define(
+				"DapBreakpointRejected",
+				{ text = "", texthl = "DiagnosticSignHint", linehl = "", numhl = "" }
+			)
+			vim.fn.sign_define("DapLogPoint", { text = "", texthl = "DiagnosticSignInfo", linehl = "", numhl = "" })
+			vim.fn.sign_define(
+				"DapStopped",
+				{ text = "", texthl = "DiagnosticSignInfo", linehl = "DiagnosticUnderlineInfo", numhl = "" }
+			)
+
 			-- Dap-UI Config
 			dap.listeners.after.event_initialized["dapui_config"] = function()
 				dapui.open()
@@ -21,6 +39,10 @@ return {
 			-- Keybindings
 			keymap.set("n", "<leader>dt", dap.toggle_breakpoint, { desc = "Toggles a dap breakpoint" })
 			keymap.set("n", "<leader>dc", dap.continue, { desc = "Dap Continue" })
+			keymap.set("n", "<F5>", dap.continue, { desc = "Start/Continue Debugging" })
+			keymap.set("n", "<F8>", dap.step_over, { desc = "Step Over" })
+			keymap.set("n", "<F7>", dap.step_into, { desc = "Step Into" })
+			keymap.set("n", "<F9>", dap.step_out, { desc = "Step Out" })
 
 			--[[ -- Adapters
 			dap.adapters.coreclr = {
