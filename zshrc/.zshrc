@@ -34,6 +34,7 @@ export PATH="$PATH:/home/novak/.dotnet/tools"
 export PATH="$PATH/usr/local/bin/netcoredbg/netcoredbg"
 export DOTNET_ENVIRONMENT='local'
 export ASPNETCORE_ENVIRONMENT='local'
+export DISPLAY=:0
 
 alias nuget="mono /usr/local/bin/nuget.exe"
 alias dev-tmux="~/.config/tmux/dev-tmux.sh"

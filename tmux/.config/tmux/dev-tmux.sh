@@ -34,25 +34,25 @@ install_if_missing neofetch
 tmux new-session -d -s $SESSION_NAME
 
 # Window 1: Code editing in ~/dev
-tmux new-window -t $SESSION_NAME:0 -n 'Editor'
-tmux send-keys -t $SESSION_NAME:0 "cd $DEV_DIR" C-m
-tmux send-keys -t $SESSION_NAME:0 "nvim" C-m
+tmux new-window -t $SESSION_NAME:1 -n 'Editor'
+tmux send-keys -t $SESSION_NAME:1 "cd $DEV_DIR" C-m
+tmux send-keys -t $SESSION_NAME:1 "nvim" C-m
 
 # Window 2: Obsidian notes with nvim
-tmux new-window -t $SESSION_NAME:1 -n 'Obsidian'
-tmux send-keys -t $SESSION_NAME:1 "cd $OBSIDIAN_DIR" C-m
-tmux send-keys -t $SESSION_NAME:1 "nvim" C-m
-tmux rename-window -t $SESSION_NAME:1 'Obsidian' 
+tmux new-window -t $SESSION_NAME:2 -n 'Obsidian'
+tmux send-keys -t $SESSION_NAME:2 "cd $OBSIDIAN_DIR" C-m
+tmux send-keys -t $SESSION_NAME:2 "nvim" C-m
+tmux rename-window -t $SESSION_NAME:2 'Obsidian' 
 
 # Window 3: Metrics with htop and neofetch in vertical split
-tmux new-window -t $SESSION_NAME:2 -n 'Metrics'
+tmux new-window -t $SESSION_NAME:3 -n 'Metrics'
 tmux split-window -h
-tmux send-keys -t $SESSION_NAME:2.0 "htop" C-m
-tmux send-keys -t $SESSION_NAME:2.1 "neofetch" C-m
+tmux send-keys -t $SESSION_NAME:3.0 "htop" C-m
+tmux send-keys -t $SESSION_NAME:3.1 "neofetch" C-m
 
 # Window 4: App server in ~/dev
-tmux new-window -t $SESSION_NAME:3 -n 'Server'
-tmux send-keys -t $SESSION_NAME:3 "cd $DEV_DIR" C-m
+tmux new-window -t $SESSION_NAME:4 -n 'Server'
+tmux send-keys -t $SESSION_NAME:4 "cd $DEV_DIR" C-m
 
 # Attach to the tmux session
 tmux attach-session -t $SESSION_NAME

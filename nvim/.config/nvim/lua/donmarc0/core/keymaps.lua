@@ -20,3 +20,8 @@ keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" }) 
 keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
 keymap.set("n", "<leader>hh", ":split | terminal<CR>", { desc = "Horizontal Terminal Split" })
 keymap.set("t", "<C-x>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+
+-- Absolute file path
+keymap.set("n", "<leader>bp", function()
+	print(vim.fn.expand("%:p"))
+end, { desc = "Print buffer path" })
