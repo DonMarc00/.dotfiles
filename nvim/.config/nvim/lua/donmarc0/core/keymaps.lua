@@ -25,3 +25,4 @@ keymap.set("t", "<C-x>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 keymap.set("n", "<leader>bp", function()
 	print(vim.fn.expand("%:p"))
 end, { desc = "Print buffer path" })
+
