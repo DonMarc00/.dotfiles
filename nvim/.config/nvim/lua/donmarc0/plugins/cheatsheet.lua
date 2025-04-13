@@ -12,6 +12,7 @@ M.opts = {
 		"                                      ",
 		"                                      ",
 	},
+	layout = "column",
 	-- Example keymaps (this doesn't create any)
 	keymaps = {
 		["Oil"] = {
@@ -23,24 +24,22 @@ M.opts = {
 			{ "Open horizontal split", "⌃x" },
 			{ "Go to current working directory", "." },
 		},
-		["Cmp"] = {
-			{ "Select entry", "⌃f" },
-			{ "Next result - Jump to next snippet placeholder", "⌃n" },
-			{ "Previous result - Jump to previous snippet placeholder", "⌃p" },
-			{ "Scroll up in preview", "⌃u" },
-			{ "Scroll down in preview", "⌃d" },
-			{ "Abort autocompletion", "⌃e" },
+		["Substitute"] = {
+			{ "Replace string in file (c for confirm)", ":%s/o-string/r-string/gc" },
+			{ "Delete string in file", ":%s/o-string//gc" },
 		},
-		["Comment"] = {
-			{ "Comment line toggle", "gcc" },
-			{ "Comment block toggle", "gbc" },
-			{ "Comment visual selection", "gc" },
-			{ "Comment visual selection using block delimiters", "gb" },
-			{ "Comment out text object line wise", "gc<motion>" },
-			{ "Comment out text object block wise", "gb<motion>" },
-			{ "Add comment on the line above", "gcO" },
-			{ "Add comment on the line below", "gco" },
-			{ "Add comment at the end of line", "gcA" },
+		["Surround"] = {
+			{ "Surround in visual mode", "S{" },
+			{ "surr*ound_word", "ysiw)" },
+			{ "*make strings", "ys$'" },
+			{ "[delete ar*ound me!]", "ds]" },
+			{ "remove <b>HTML t*ags</b>", "dst" },
+			{ "<b>or tag* types</b>", "csth1<CR>" },
+			{ "delete(functi*on calls)", "dsf" },
+		},
+		["Macros"] = {
+			{ "Record to register a", "qa" },
+			{ "Play register a", "@a" },
 		},
 	},
 }
