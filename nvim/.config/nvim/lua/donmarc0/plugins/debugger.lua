@@ -69,7 +69,7 @@ return {
 		dap.adapters.chrome = {
 			type = "executable",
 			command = "node",
-			args = { os.getenv("HOME") .. "/dev/vscode-chrome-debug/out/src/chromeDebug.js" },
+			args = { vim.fn.getenv("VS_CODE_CHROME_DEBUGER") },
 		}
 
 		for _, language in ipairs({ "typescript", "javascript" }) do

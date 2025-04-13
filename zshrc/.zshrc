@@ -26,15 +26,11 @@ autoload -Uz compinit && compinit
 
 zinit cdreplay -q
 
-export WINHOME="/mnt/c/Users/NovakM/"
-export OBSIDIAN="/mnt/c/Users/NovakM/ObsidianVaults/KnowledgeDB/"
-export ASA_PW="2Kzt3\`rrrKMYe\$WX\`aAF"
-export FSD_PW="atnluNZFc8cN95GJiRocF8kuxrmAu8"
 export PATH="$PATH:/home/novak/.dotnet/tools"
 export PATH="$PATH/usr/local/bin/netcoredbg/netcoredbg"
-export DOTNET_ENVIRONMENT='local'
-export ASPNETCORE_ENVIRONMENT='local'
 export DISPLAY=:0
+# Load device specific environment variables from .zshrc.local
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
 alias nuget="mono /usr/local/bin/nuget.exe"
 alias dev-tmux="~/.config/tmux/dev-tmux.sh"

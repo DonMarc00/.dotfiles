@@ -42,12 +42,20 @@ If there should be problems with the plugins that are supposed to be installed b
 
 ```bash
 rm -rf ~/.config/tmux/plugins/
-
 ```
 
 ### Nvim
 
 ```bash
 rm -rf ~/.local/share/nvim/lazy/
-
 ```
+
+## Local zsh environment variables
+
+As some configs depend on paths/PATs/etc. those have been outsourced to be injected by a local zshrc file located at
+`~/.zshrc.local`
+
+A list of required envs can be found here:
+
+- OBSIDIAN: Path of obsidian vault
+- VS_CODE_CHROME_DEBUGGER: Location of js debug adapter
