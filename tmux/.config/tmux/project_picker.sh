@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DEV_ROOT="$HOME/dev"
+DEV_ROOT="$DEV_ROOT"
 cd "$DEV_ROOT" || exit
 
 echo "Select a project directory (2nd level):"
@@ -10,6 +10,6 @@ if [ -n "$SELECTED" ]; then
   cd "$DEV_ROOT/$SELECTED" && exec nvim
 else
   echo "No project selected."
-  exec bash
+  exec zsh -l
 fi
 

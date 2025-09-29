@@ -20,6 +20,13 @@ return {
 			min_chars = 2,
 		},
 
+		preferred_link_style = "markdown", -- <— key bit
+		-- if you use image pasting/export, also:
+		attachments = {
+			-- ensure it writes Markdown-style embeds, not wiki
+			preferred_link_style = "markdown",
+		},
+
 		mappings = {
 			["gf"] = {
 				action = function()
