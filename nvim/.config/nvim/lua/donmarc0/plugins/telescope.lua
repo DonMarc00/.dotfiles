@@ -6,18 +6,17 @@ return {
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		"nvim-tree/nvim-web-devicons",
 		"folke/todo-comments.nvim",
+		"nvim-telescope/telescope-live-grep-args.nvim",
 	},
 	config = function()
 		local telescope = require("telescope")
 		local actions = require("telescope.actions")
 		local transform_mod = require("telescope.actions.mt").transform_mod
-
 		local trouble = require("trouble")
 		local trouble_telescope = require("trouble.sources.telescope")
 
-		-- or create your custom action
 		local custom_actions = transform_mod({
-			open_trouble_qflist = function(prompt_bufnr)
+			open_trouble_qflist = function(_)
 				trouble.toggle("quickfix")
 			end,
 		})
@@ -53,12 +52,32 @@ return {
 					override_file_sorter = true,
 					case_mode = "smart_case",
 				},
+				live_grep_args = {
+					auto_quoting = true,
+					mappings = {
+						i = {
+							-- Quote current prompt
+							["<C-k>"] = require("telescope-live-grep-args.actions").quote_prompt(),
+							-- Quote and append --iglob (type a glob after pressing)
+							["<C-i>"] = require("telescope-live-grep-args.actions").quote_prompt({
+								postfix = " --iglob ",
+							}),
+							-- Freeze results -> fuzzy refine
+							["<C-space>"] = require("telescope-live-grep-args.actions").to_fuzzy_refine,
+						},
+					},
+					-- you can add theme/layout here if you want:
+					-- theme = "dropdown",
+					-- layout_config = { mirror = true },
+				},
 			},
 		})
-		telescope.load_extension("fzf")
 
-		-- set keymaps
-		local keymap = vim.keymap -- for conciseness
+		telescope.load_extension("fzf")
+		telescope.load_extension("live_grep_args")
+
+		-- keymaps
+		local keymap = vim.keymap
 
 		keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
 		keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Fuzzy find buffers" })
@@ -67,7 +86,7 @@ return {
 		keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
 		keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "Find todos" })
 
-		-- New keybinding: Live grep INCLUDING test directories
+		-- Existing: include tests
 		keymap.set("n", "<leader>fgt", function()
 			require("telescope.builtin").live_grep({
 				vimgrep_arguments = {
@@ -81,5 +100,20 @@ return {
 				},
 			})
 		end, { desc = "Find string in cwd (including tests)" })
+
+		keymap.set("n", "<leader>fg", function()
+			require("telescope").extensions.live_grep_args.live_grep_args()
+		end, { desc = "Live grep (args)" })
+
+		keymap.set("n", "<leader>fh", function()
+			require("telescope").extensions.live_grep_args.live_grep_args({
+				additional_args = function(_)
+					return { "--glob", "*.html" }
+				end,
+			})
+		end, { desc = "Live grep in HTML files only" })
+
+		local lga_shortcuts = require("telescope-live-grep-args.shortcuts")
+		keymap.set("n", "<leader>gc", lga_shortcuts.grep_word_under_cursor, { desc = "Live grep word under cursor" })
 	end,
 }
