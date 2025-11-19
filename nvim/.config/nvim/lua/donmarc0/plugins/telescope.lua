@@ -105,14 +105,6 @@ return {
 			require("telescope").extensions.live_grep_args.live_grep_args()
 		end, { desc = "Live grep (args)" })
 
-		keymap.set("n", "<leader>fh", function()
-			require("telescope").extensions.live_grep_args.live_grep_args({
-				additional_args = function(_)
-					return { "--glob", "*.html" }
-				end,
-			})
-		end, { desc = "Live grep in HTML files only" })
-
 		local lga_shortcuts = require("telescope-live-grep-args.shortcuts")
 		keymap.set("n", "<leader>gc", lga_shortcuts.grep_word_under_cursor, { desc = "Live grep word under cursor" })
 	end,
