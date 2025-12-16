@@ -59,3 +59,20 @@ A list of required envs can be found here:
 
 - OBSIDIAN: Path of obsidian vault
 - VS_CODE_CHROME_DEBUGGER: Location of js debug adapter
+
+```json
+{
+  "extends": "../../tsconfig.base.json",
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts"
+  ],
+  "exclude": [
+    "**/*.spec.ts",
+    "**/*test*.ts",
+    "**/*.cy.ts",
+    "../**/cypress/**",
+    "../../node_modules/**"
+  ]
+}
+```
