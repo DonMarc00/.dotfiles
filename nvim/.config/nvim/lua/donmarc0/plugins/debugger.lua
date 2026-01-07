@@ -2,8 +2,6 @@ return {
 	"mfussenegger/nvim-dap",
 	dependencies = {
 		{ "rcarriga/nvim-dap-ui", dependencies = { "nvim-neotest/nvim-nio" } },
-		-- Per-project configs (see step 3)
-		"ldelossa/nvim-dap-projects",
 	},
 	config = function()
 		local dap = require("dap")
@@ -12,23 +10,25 @@ return {
 		dap.set_log_level("TRACE")
 		dapui.setup()
 
-		-- Signs (kept)
-		vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticSignError", linehl = "", numhl = "" })
-		vim.fn.sign_define(
-			"DapBreakpointCondition",
-			{ text = "", texthl = "DiagnosticSignWarn", linehl = "", numhl = "" }
-		)
-		vim.fn.sign_define(
-			"DapBreakpointRejected",
-			{ text = "", texthl = "DiagnosticSignHint", linehl = "", numhl = "" }
-		)
-		vim.fn.sign_define("DapLogPoint", { text = "", texthl = "DiagnosticSignInfo", linehl = "", numhl = "" })
+		-- IMPORTANT for interactive console apps:
+		-- program stdin goes to the terminal window, not the DAP repl.
+		dap.defaults.fallback.terminal_win_cmd = "botright split | resize 12 | terminal"
+
+		---------------------------------------------------------------------------
+		-- Signs (yours)
+		---------------------------------------------------------------------------
+		vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticSignError" })
+		vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "DiagnosticSignWarn" })
+		vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "DiagnosticSignHint" })
+		vim.fn.sign_define("DapLogPoint", { text = "", texthl = "DiagnosticSignInfo" })
 		vim.fn.sign_define(
 			"DapStopped",
-			{ text = "", texthl = "DiagnosticSignInfo", linehl = "DiagnosticUnderlineInfo", numhl = "" }
+			{ text = "", texthl = "DiagnosticSignInfo", linehl = "DiagnosticUnderlineInfo" }
 		)
 
-		-- Auto open/close dap-ui
+		---------------------------------------------------------------------------
+		-- Auto open/close dap-ui (yours)
+		---------------------------------------------------------------------------
 		dap.listeners.after.event_initialized["dapui_config"] = function()
 			dapui.open({ reset = true })
 		end
@@ -39,7 +39,9 @@ return {
 			dapui.close()
 		end
 
-		-- Keybindings (kept)
+		---------------------------------------------------------------------------
+		-- Keybinds (yours, unchanged)
+		---------------------------------------------------------------------------
 		local keymap = vim.keymap
 		keymap.set("n", "<leader>dt", dap.toggle_breakpoint, { desc = "Toggles a dap breakpoint" })
 		keymap.set("n", "<leader>dc", dap.continue, { desc = "Dap Continue" })
@@ -51,42 +53,7 @@ return {
 			dapui.toggle({ reset = true })
 		end, { desc = "Toggle DapUi" })
 
-		---------------------------------------------------------------------------
-		-- Rust adapters (pick ONE block and keep the other commented)
-		---------------------------------------------------------------------------
-
-		-- Option A: codelldb (recommended)
-		-- Try Mason first, then Homebrew fallback.
-		local function detect_codelldb()
-			local mason_cmd = vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/adapter/codelldb"
-			if vim.loop.fs_stat(mason_cmd) then
-				return mason_cmd
-			end
-			-- Homebrew (Apple Silicon)
-			if vim.loop.fs_stat("/opt/homebrew/bin/codelldb") then
-				return "/opt/homebrew/bin/codelldb"
-			end
-			-- Homebrew (Intel)
-			if vim.loop.fs_stat("/usr/local/bin/codelldb") then
-				return "/usr/local/bin/codelldb"
-			end
-			return nil
-		end
-
-		local codelldb_path = detect_codelldb()
-		if codelldb_path then
-			dap.adapters.codelldb = function(cb, _)
-				cb({
-					type = "server",
-					port = "${port}",
-					executable = {
-						command = codelldb_path,
-						args = { "--port", "${port}" },
-					},
-				})
-			end
-		end
-
-		require("nvim-dap-projects").search_project_config()
+		-- Intentionally: NO dap.adapters.coreclr and NO dap.configurations.cs
+		-- easy-dotnet registers everything (auto_register_dap).
 	end,
 }
