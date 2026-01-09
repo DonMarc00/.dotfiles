@@ -26,3 +26,6 @@ keymap.set("n", "<leader>bp", function()
 	print(vim.fn.expand("%:p"))
 end, { desc = "Print buffer path" })
 
+keymap.set("n", "<leader>lnt", function()
+	vim.opt.relativenumber = not vim.opt.relativenumber:get()
+end, { desc = "Toggle relative line numbers" })
