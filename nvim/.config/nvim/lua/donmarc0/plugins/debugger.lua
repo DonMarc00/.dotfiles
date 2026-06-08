@@ -2,11 +2,18 @@ return {
 	"mfussenegger/nvim-dap",
 	dependencies = {
 		{ "rcarriga/nvim-dap-ui", dependencies = { "nvim-neotest/nvim-nio" } },
+		{ "theHamsta/nvim-dap-virtual-text" },
 	},
 	config = function()
 		local dap = require("dap")
 		local dapui = require("dapui")
-
+		require("nvim-dap-virtual-text").setup({
+			enabled = true,
+			commented = true,
+			only_first_definition = false,
+			all_references = true,
+			virt_text_pos = "eol",
+		})
 		dap.set_log_level("TRACE")
 		dapui.setup()
 

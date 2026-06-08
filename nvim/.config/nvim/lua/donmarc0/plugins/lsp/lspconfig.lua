@@ -85,7 +85,6 @@ return {
 				"lua_ls",
 				"graphql",
 				"angularls",
-				"csharp_ls",
 			},
 			handlers = {
 				-- Default handler for all servers not overridden below

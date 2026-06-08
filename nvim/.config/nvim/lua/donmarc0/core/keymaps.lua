@@ -21,6 +21,14 @@ keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer
 keymap.set("n", "<leader>hh", ":split | terminal<CR>", { desc = "Horizontal Terminal Split" })
 keymap.set("t", "<C-x>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
+-- paste without overwriting register
+keymap.set("x", "<leader>p", '"_dP', { desc = "Paste without yanking" })
+
+-- copy to system clipboard
+keymap.set("n", "<leader>y", '"+y', { desc = "Yank to system clipboard" })
+keymap.set("v", "<leader>y", '"+y', { desc = "Yank selection to clipboard" })
+keymap.set("n", "<leader>Y", '"+Y', { desc = "Yank line to clipboard" })
+
 -- Absolute file path
 keymap.set("n", "<leader>bp", function()
 	print(vim.fn.expand("%:p"))

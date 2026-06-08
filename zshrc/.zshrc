@@ -1,3 +1,4 @@
+export PATH="/snap/bin:$PATH"
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
@@ -27,7 +28,6 @@ autoload -Uz compinit && compinit
 zinit cdreplay -q
 
 export PATH="$PATH:/home/novak/.dotnet/tools"
-export PATH="$PATH/usr/local/bin/netcoredbg/netcoredbg"
 export DISPLAY=:0
 # Load device specific environment variables from .zshrc.local
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
@@ -97,3 +97,4 @@ zinit light-mode for \
     zdharma-continuum/zinit-annex-rust
 
 ### End of Zinit's installer chunk
+export PATH="$HOME/bin:$PATH"
