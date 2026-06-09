@@ -9,7 +9,7 @@ return {
 		local dotnet = require("easy-dotnet")
 
 		local function uname()
-			return vim.loop.os_uname()
+			return vim.uv.os_uname()
 		end
 
 		local function is_macos_arm64()
@@ -25,7 +25,7 @@ return {
 			-- macOS arm64: use Cliffback plugin binary (bundled)
 			if is_macos_arm64() then
 				local p = vim.fn.stdpath("data") .. "/lazy/netcoredbg-macOS-arm64.nvim/netcoredbg/netcoredbg"
-				if vim.loop.fs_stat(p) then
+				if vim.uv.fs_stat(p) then
 					return p
 				end
 			end
@@ -33,7 +33,7 @@ return {
 			-- WSL/Linux: use Mason netcoredbg
 			if is_linux() then
 				local mason_p = vim.fn.stdpath("data") .. "/mason/bin/netcoredbg"
-				if vim.loop.fs_stat(mason_p) then
+				if vim.uv.fs_stat(mason_p) then
 					return mason_p
 				end
 			end
