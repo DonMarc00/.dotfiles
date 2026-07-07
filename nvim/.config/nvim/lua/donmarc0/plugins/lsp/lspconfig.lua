@@ -14,6 +14,13 @@ return {
 		local util = require("lspconfig.util")
 
 		local keymap = vim.keymap
+		local inline_diagnostics_enabled = false
+		local inline_diagnostics_config = {
+			current_line = true,
+			virt_text_pos = "right_align",
+			prefix = "●",
+			spacing = 2,
+		}
 
 		-- Buffer-local keymaps when LSP attaches
 		vim.api.nvim_create_autocmd("LspAttach", {
@@ -55,6 +62,23 @@ return {
 
 				opts.desc = "Show line diagnostics"
 				keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
+
+				opts.desc = "Toggle inline diagnostics"
+				keymap.set("n", "<leader>di", function()
+					inline_diagnostics_enabled = not inline_diagnostics_enabled
+
+					if inline_diagnostics_enabled then
+						vim.diagnostic.config({
+							virtual_lines = false,
+							virtual_text = inline_diagnostics_config,
+						})
+					else
+						vim.diagnostic.config({
+							virtual_lines = false,
+							virtual_text = false,
+						})
+					end
+				end, opts)
 
 				opts.desc = "Go to previous diagnostic"
 				keymap.set("n", "[d", function()

@@ -19,7 +19,7 @@ return {
 
 		-- IMPORTANT for interactive console apps:
 		-- program stdin goes to the terminal window, not the DAP repl.
-		dap.defaults.fallback.terminal_win_cmd = "botright split | resize 12 | terminal"
+		dap.defaults.fallback.terminal_win_cmd = "botright 12new"
 
 		---------------------------------------------------------------------------
 		-- Signs (yours)
